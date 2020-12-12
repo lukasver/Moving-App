@@ -29,12 +29,11 @@ export const contentPageStyles = makeStyles(theme => ({
     opacity: '80%',
   },
   photo: {
-    width: '400px',
-    height: '400px',
+    width: '300px',
+    height: '300px',
     borderRadius: '50%',
     overflow: 'hidden',
     border: '5px solid black',
     margin: '20px',
-    'animation-name': 'bounce'
   },
 }))
