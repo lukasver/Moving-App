@@ -80,7 +80,7 @@ function EmailForm({ handleClose, dataToSend }) {
   }
 
   return (
-    <form className={classes.root} onSubmit={handleSubmit} autoComplete="off">
+    <form className={classes.root} onSubmit={handleSubmit} autoComplete="off" data-netlify-recaptcha="true" data-netlify="true">
       <div style={{ position: 'relative' }}>
         <IconButton onClick={handleClose} style={{ position: 'absolute', top: -30, right: -45 }} aria-label="closeModal" size="small">
           <CloseIcon color='primary' fontSize="small" />
