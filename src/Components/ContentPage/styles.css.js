@@ -3,12 +3,12 @@ import banner from '../../img/fondo.JPG';
 
 export const contentPageStyles = makeStyles(theme => ({
   contentContainerRandom: {
-    minHeight: 300,
+    minHeight: 250,
     backgroundImage: `url(https://picsum.photos/1320/460)`,
     backgroundSize: '100% 100%',
   },
   contentContainer: {
-    minHeight: 300,
+    minHeight: 250,
     backgroundImage: `url(${banner})`,
     backgroundSize: '100% 120%',
   },
@@ -27,8 +27,8 @@ export const contentPageStyles = makeStyles(theme => ({
     opacity: '80%',
   },
   photo: {
-    width: '300px',
-    height: '300px',
+    width: '240px',
+    height: '240px',
     borderRadius: '50%',
     overflow: 'hidden',
     border: '5px solid black',

@@ -70,7 +70,6 @@ function EmailForm({ handleClose, dataToSend }) {
   }
 
   const recaptchaLoaded = () => {
-    console.log(recaptchaRef)
     return
   }
 
@@ -178,7 +177,8 @@ const validate = (input) => {
   }
   if (!input.email) {
     errors.email = 'Este campo es requerido';
-  } else if (!/^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/.test(input.email)) {
+  // eslint-disable-next-line no-useless-escape
+  } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(input.email)) {
     errors.email = 'Ingresar un formato de e-mail válido';
   }
   return errors;

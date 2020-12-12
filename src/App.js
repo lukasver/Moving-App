@@ -7,7 +7,6 @@ import Table from './Components/Table';
 
 function App() {
 
-  console.log(process.env)
   return (
     <div className="App">
       <Route path='/' render={({location}) => <ContentPage location={location.pathname}/>}/>

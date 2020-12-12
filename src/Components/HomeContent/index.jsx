@@ -21,7 +21,7 @@ function HomeContent() {
           {Title}
         </Typography>
       </Box>
-      <Box component='div' m={9} mt={7} pb={9}>
+      <Box component='div' m={9} mt={6} pb={9}>
         <Typography align='justify' variant='h6'>
           {Body}
         </Typography>
