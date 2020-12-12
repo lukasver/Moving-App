@@ -17,12 +17,12 @@ function HomeContent() {
   return (
     <Paper elevation={3} className={classes.paper}>
       <Box component='div' pt={2}>
-        <Typography align='center' variant='h2'>
+        <Typography align='center' variant='h3'>
           {Title}
         </Typography>
       </Box>
       <Box component='div' m={9} mt={7} pb={9}>
-        <Typography align='justify' variant='h5'>
+        <Typography align='justify' variant='h6'>
           {Body}
         </Typography>
       </Box>

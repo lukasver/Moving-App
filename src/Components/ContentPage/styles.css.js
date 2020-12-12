@@ -9,7 +9,7 @@ export const contentPageStyles = makeStyles(theme => ({
     opacity: 20,
   },
   contentContainer: {
-    minHeight: 400,
+    minHeight: 300,
     backgroundImage: `url(${banner})`,
     backgroundSize: '100% 120%',
     opacity: 20,
