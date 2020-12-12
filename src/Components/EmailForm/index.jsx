@@ -1,32 +1,50 @@
-import React, { useState } from 'react';
-import { init, sendForm } from 'emailjs-com';
-import Button from '@material-ui/core/Button';
+import React, { useState, useRef } from 'react';
+import { send } from 'emailjs-com';
+import { Box, Link, Button, IconButton, Typography } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import { useStyles } from './styles.css.js';
-import Recaptcha from 'react-recaptcha'; 
+import Recaptcha from 'react-recaptcha';
+import { counter, htmlGenerator } from '../../utils';
+import CloseIcon from '@material-ui/icons/Close';
+import Swal from 'sweetalert2'
+import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 
-// init("user_mIb5hdem6LzLjZrCjoiQq");
-// sendForm('contact_service', 'contact_form', this)
-
-
-
-function EmailForm() {
+function EmailForm({ handleClose, dataToSend }) {
 
   const classes = useStyles();
-
-  const initialValues = {
-    contactName: '',
-    email: '',
-    whatsapp: '',
-  }
+  let contactFormId = counter();
+  const recaptchaRef = useRef();
 
   const [values, setValues] = useState(initialValues);
   const [human, setHuman] = useState(false);
   const [errors, setErrors] = useState(true);
 
-  const recaptchaRef = React.useRef();
-
-  
+  // ====== MODALS ====== //
+  const loadingModal = () => {
+    Swal.fire({
+      title: 'Enviando...',
+      willOpen: () => {
+        Swal.showLoading()
+      }, backdrop: `#36454f,0.4`, showConfirmButton: false
+    })
+  }
+  const errorModal = () => {
+    Swal.fire({
+      icon: 'error',
+      title: 'Uups...',
+      text: 'Ocurrió un error, tu listado no fue enviado 😞...',
+      footer: 'Mejor mandanos un <a href=https://wa.link/s9ed8s>Whatsapp 📱</a>',
+      showConfirmButton: false
+    })
+  }
+  const successModal = () => {
+    Swal.fire({
+      icon: 'success',
+      title: 'E-mail enviado. Gracias!!',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
 
   // ====== HANDLERS ====== //
   const handleChange = (event) => {
@@ -40,10 +58,19 @@ function EmailForm() {
     console.log("Captcha value:", value);
   }
 
-  const handleSubmit = async () => {
-    console.log('submited')
-    const token = await recaptchaRef.current.executeAsync()
-    console.log(token)
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const formData = { ...values, contactId: contactFormId(), itemList: htmlGenerator(dataToSend) }
+    loadingModal();
+    send(process.env.REACT_APP_EMAILJS_SERVICE, template, formData, process.env.REACT_APP_EMAILJS_USERID)
+      .then(res => {
+        successModal()
+      })
+      .catch(error => {
+        errorModal()
+      })
+    handleClose()
+    return
   }
 
   const recaptchaLoaded = () => {
@@ -58,6 +85,14 @@ function EmailForm() {
 
   return (
     <form className={classes.root} onSubmit={handleSubmit} autoComplete="off">
+      <div style={{ position: 'relative' }}>
+        <IconButton onClick={handleClose} style={{ position: 'absolute', top: -30, right: -45 }} aria-label="closeModal" size="small">
+          <CloseIcon color='primary' fontSize="small" />
+        </IconButton>
+      </div>
+      <Box component='div' mb={2}>
+        <Typography variant='h4' align='center' color='primary'>Completa tus datos</Typography>
+      </Box>
       <div>
         <TextField
           error={errors.contactName ? true : false}
@@ -88,22 +123,25 @@ function EmailForm() {
           label="Whatsapp"
           helperText={errors.whatsapp ? 'Campo Requerido' : null}
           variant="filled"
+          placeholder='Ej: 341 6291123'
           fullWidth
           id={'whatsapp'}
           value={values.whatsapp}
           onChange={handleChange}
         />
       </div>
-      <Recaptcha
-        sitekey={process.env.REACT_APP_RECAPTCHA_FRONTEND}
-        size='normal'
-        render='explicit'
-        onloadCallback={recaptchaLoaded}
-        verifyCallback={verifyCallback}
-        theme='dark'
-        hl='es-419'
-        ref={recaptchaRef}
-      />
+      <Box className={classes.captchaCont} component="div" m={1}>
+        <Recaptcha
+          sitekey={process.env.REACT_APP_RECAPTCHA_FRONTEND}
+          size='normal'
+          render='explicit'
+          onloadCallback={recaptchaLoaded}
+          verifyCallback={verifyCallback}
+          theme='light'
+          hl='es-419'
+          ref={recaptchaRef}
+        />
+      </Box>
       <Button
         disabled={
           (!human || !errors || JSON.stringify(errors) !== JSON.stringify({}))
@@ -116,13 +154,23 @@ function EmailForm() {
         type="submit"
         fullWidth
       >
-        {!errors || JSON.stringify(errors) !== JSON.stringify({})
+        {!human || !errors || JSON.stringify(errors) !== JSON.stringify({})
           ? 'Completar todos los campos'
-          : 'Crear Recruiter'}
+          : 'Enviar'}
       </Button>
+      <Box component='div' style={{display: 'flex', alignContent:'center', justifyContent: 'center', paddingBottom: 10}}>
+      <Link href='https://wa.link/s9ed8s' style={{display: 'flex', alignContent:'center', justifyContent: 'center', minWidth: '100%'}}color="inherit"><Typography variant='h6'> si preferís mandanos un whatsapp</Typography> <WhatsAppIcon size='small' style={{color: 'green', margin: 4}} /></Link>
+      </Box>
     </form>
   );
 }
+
+const initialValues = {
+  contactName: '',
+  email: '',
+  whatsapp: '',
+}
+const template = 'contact_form'
 
 const validate = (input) => {
   let errors = {};
@@ -139,7 +187,5 @@ const validate = (input) => {
   }
   return errors;
 };
-
-
 
 export default EmailForm;

@@ -2,30 +2,36 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
+    marginTop: '2rem',
     '& .MuiTextField-root': {
-      maxWidth: 600,
+      // maxWidth: 400,
+      // minWidth: 400,
       marginBottom: 20,
     },
     '& .MuiInputBase-input': {
-      color: '#FFFFFF',
+      color: '#111111',
     },
     '& .MuiFormControl-root': {
-      margin: theme.spacing(2),
     },
     '& .Mui-disabled': {
-      backgroundColor: '#FFF001',
+      backgroundColor: '#3f51b5',
+      color: '#FFFFFF',
+      opacity: '50%'
     },
     '& .MuiFilledInput-root': {
-      backgroundColor: '#0e0e0e',
+      backgroundColor: '#FFF',
       '&:hover': {},
     },
   },
   submitbtn: {
     maxWidth: 600,
     marginBottom: theme.spacing(3),
-    '&:hover': {
-      color: '#111111',
-      backgroundColor: '#FFF001',
-    },
+    // '&:hover': {
+    //   color: '#111111',
+    //   backgroundColor: '#FFF001',
+    // },
   },
+  captchaCont: {
+    textAlign: "-webkit-center"
+  }
 }));
