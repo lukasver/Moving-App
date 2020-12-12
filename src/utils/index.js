@@ -10,7 +10,7 @@ export function counter() {
 
 // --- html code generator ---
 
-let test = [{ id: 1, name: 'Espejo redondo' }, { id: 2, name: 'Planta: Lengua de suegra' }, { id: 3, name: 'Termo Stanley' },]
+// let test = [{ id: 1, name: 'Espejo redondo' }, { id: 2, name: 'Planta: Lengua de suegra' }, { id: 3, name: 'Termo Stanley' },]
 
 export function htmlGenerator(arrayDeObjetos) {
   let result;

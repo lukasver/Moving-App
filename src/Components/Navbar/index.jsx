@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 function NavBar() {
   const classes = useStyles();
-  const navButtons = ['Living', 'Comedor', 'Dormitorio', 'Bano', 'Exterior']
+  const navButtons = ['Living', 'Comedor', 'Dormitorio', 'Cocina', 'Bano', 'Exterior']
 
   return (
     <div className={classes.root}>

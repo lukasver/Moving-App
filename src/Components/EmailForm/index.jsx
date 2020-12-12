@@ -54,10 +54,6 @@ function EmailForm({ handleClose, dataToSend }) {
     setErrors(validate({ ...values, [id]: value }));
   };
 
-  function onChange(value) {
-    console.log("Captcha value:", value);
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     const formData = { ...values, contactId: contactFormId(), itemList: htmlGenerator(dataToSend) }
@@ -159,7 +155,7 @@ function EmailForm({ handleClose, dataToSend }) {
           : 'Enviar'}
       </Button>
       <Box component='div' style={{display: 'flex', alignContent:'center', justifyContent: 'center', paddingBottom: 10}}>
-      <Link href='https://wa.link/s9ed8s' style={{display: 'flex', alignContent:'center', justifyContent: 'center', minWidth: '100%'}}color="inherit"><Typography variant='h6'> si preferís mandanos un whatsapp</Typography> <WhatsAppIcon size='small' style={{color: 'green', margin: 4}} /></Link>
+      <Link target="_blank" rel="noopener" href='https://wa.link/s9ed8s' style={{display: 'flex', alignContent:'center', justifyContent: 'center', minWidth: '100%'}}color="inherit"><Typography variant='h6'> si preferís mandanos un whatsapp</Typography> <WhatsAppIcon size='small' style={{color: 'green', margin: 4}} /></Link>
       </Box>
     </form>
   );
@@ -182,7 +178,7 @@ const validate = (input) => {
   }
   if (!input.email) {
     errors.email = 'Este campo es requerido';
-  } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(input.email)) {
+  } else if (!/^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/.test(input.email)) {
     errors.email = 'Ingresar un formato de e-mail válido';
   }
   return errors;

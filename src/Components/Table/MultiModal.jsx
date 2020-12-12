@@ -9,9 +9,9 @@ function MultiModal(props) {
 
   // ================================  HANDLERS ================================ // 
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
 
   const handleClose = () => {
     setOpen(false);

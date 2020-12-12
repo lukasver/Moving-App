@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import img from '../../img/tatulucas.png'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,7 +9,8 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    backgroundColor: '#F6F1EB',
+    backgroundColor: '#000000',
+    margin: '0 -3rem 0 -3rem'
   },
   gridList: {
     padding: theme.spacing(1),
@@ -19,15 +19,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function PhotoGrid({photos}) {
+function PhotoGrid({photos, comingSoon}) {
 
   const classes = useStyles();
   
 
   return (
     <div className={classes.root}>
-      <GridList cellHeight={160} className={classes.gridList} cols={2}>
-        {photos.map((tile) => (
+      <GridList cellHeight={540} className={classes.gridList} cols={1}>
+        {comingSoon.map((tile) => (
           <GridListTile key={tile.img} cols={tile.cols || 1}>
             <img src={tile.img} alt={tile.title} />
           </GridListTile>
@@ -44,6 +44,9 @@ PhotoGrid.defaultProps = {
     img: 'https://i1.wp.com/www.webelectro.com.ar/wp-content/uploads/2016/08/tv-led-ken-brown-32-kb-32-2260-hd-smart-wifi-313801-MLA20415305994_092015-O.jpeg?fit=480%2C480&ssl=1'
   },{
     img: 'https://www.nikzer.com/wp-content/uploads/2019/01/10.jpg'
+  }],
+  comingSoon: [{
+    img: 'https://static.wixstatic.com/media/f186d1_8a28db63b7574babb9854cfd0805842e~mv2.gif'
   }]
 }
 

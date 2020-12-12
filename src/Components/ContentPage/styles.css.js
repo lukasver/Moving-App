@@ -2,6 +2,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import banner from '../../img/fondo.JPG';
 
 export const contentPageStyles = makeStyles(theme => ({
+  contentContainerRandom: {
+    minHeight: 400,
+    backgroundImage: `url(https://picsum.photos/1320/460)`,
+    backgroundSize: '100% 120%',
+    opacity: 20,
+  },
   contentContainer: {
     minHeight: 400,
     backgroundImage: `url(${banner})`,

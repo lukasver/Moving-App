@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Button, Modal, Paper, Typography } from '@material-ui/core';
+import { Container, Paper } from '@material-ui/core';
 import { useStyles, modalStyles } from './styles.css.js';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
