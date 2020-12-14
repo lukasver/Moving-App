@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Button from '@material-ui/core/Button';
+import { Button, Box } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+// import ListItemText from '@material-ui/core/ListItemText';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import CloseIcon from '@material-ui/icons/Close';
 
 function SwipeableTemporaryDrawer({ buttons, state, setState, classes }) {
 
@@ -28,13 +29,16 @@ function SwipeableTemporaryDrawer({ buttons, state, setState, classes }) {
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
+      <Box component='div'>
+        <Button variant='contained' fullWidth color='primary' ><CloseIcon/></Button>
+      </Box>
+      <Divider />
       <List>
         {buttons.map((text, index) => (
           <Link className={classes.linkButtons} to={text === 'home' ? '/' : `/${text}`}><ListItem button key={index}>
             <ListItemIcon><ArrowForwardIosIcon /></ListItemIcon>
             <Button color='primary' fullWidth variant='contained'>{text.toUpperCase()}</Button>
             {/* <ListItemText primary={text.toUpperCase()} /> */}
-            <Divider />
           </ListItem>
           </Link>
         ))}
@@ -51,7 +55,7 @@ function SwipeableTemporaryDrawer({ buttons, state, setState, classes }) {
             open={state}
             onClose={toggleDrawer(anchor, false)}
             onOpen={toggleDrawer(anchor, true)}
-            PaperProps={{style: {backgroundColor: '#F6F1EB'}}}
+            PaperProps={{ style: { backgroundColor: '#F6F1EB' } }}
           >
             {list(anchor)}
           </SwipeableDrawer>

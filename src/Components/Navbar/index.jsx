@@ -11,36 +11,26 @@ import Drawer from './Drawer'
 import * as areas from '../../data.js';
 
 
-function NavBar() {
+function NavBar({useWindowSize}) {
+  const [width, height] = useWindowSize();
   const classes = navStyles();
 
-  const [click, setClick] = useState(false)
-  const [buttons, setButtons] = useState(true)
+  console.log(width, height)
+
+  // const [click, setClick] = useState(false)
   const [drawerState, setDrawerState] = useState(false);
 
   const navButtons = Object.keys(areas)
 
-  const handleClick = () => setClick(!click);
-  const closeMobileMenu = () => setClick(false);
-
-  const showButton = () => {
-    if (window.innerWidth <= 960) {
-      console.log(window.innerWidth)
-      setButtons(false);
-    } else {
-      setButtons(true);
-    }
-  }
-
-  window.addEventListener('resize', showButton);
-
+  // const handleClick = () => setClick(!click);
+  // const closeMobileMenu = () => setClick(false);
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar variant="dense">
 
-          {buttons ?
+          {width >= 960 ?
             <IconButton onClick={() => setDrawerState(true)} edge="start" className={classes.menuButton} color="inherit" aria-label="home">
               <Link className={classes.linkButtons} to='/'><FlightTakeoffIcon /></Link>
             </IconButton>
@@ -50,7 +40,7 @@ function NavBar() {
             </IconButton>
           }
           <Box component='div' className={classes.btnContainer}>
-            {buttons && navButtons.map(item => {
+            {width >= 960 && navButtons.map(item => {
               return <Link className={classes.linkButtons} to={item}><Button className={classes.navButtons}>{item.toUpperCase() + ' '}</Button></Link>
             })}
           </Box>
