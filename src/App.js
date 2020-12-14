@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom';
 import ContentPage from './Components/ContentPage';
 import HomeContent from './Components/HomeContent';
 import Table from './Components/Table';
+import Footer from './Components/Footer';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
       <Route path='/' render={() => <Navbar useWindowSize={useWindowSize} />} />
       <Route exact path='/' render={() => <HomeContent />} />
       <Route exact path='/:area' render={({ match }) => <Table params={match.params.area} />} />
+      <Route path='/' render={() => <Footer/>} />
     </div>
   );
 }

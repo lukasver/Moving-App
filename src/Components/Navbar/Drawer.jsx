@@ -9,6 +9,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 // import ListItemText from '@material-ui/core/ListItemText';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import CloseIcon from '@material-ui/icons/Close';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 function SwipeableTemporaryDrawer({ buttons, state, setState, classes }) {
 
@@ -21,7 +22,6 @@ function SwipeableTemporaryDrawer({ buttons, state, setState, classes }) {
     setState(open);
   };
 
-
   const list = () => (
     <div
       className={classes.list}
@@ -30,7 +30,7 @@ function SwipeableTemporaryDrawer({ buttons, state, setState, classes }) {
       onKeyDown={toggleDrawer(false)}
     >
       <Box component='div'>
-        <Button variant='contained' fullWidth color='primary' ><CloseIcon/></Button>
+        <Button style={{borderRadius: 0}} variant='contained' fullWidth color='primary' ><CloseIcon /></Button>
       </Box>
       <Divider />
       <List>
@@ -38,35 +38,34 @@ function SwipeableTemporaryDrawer({ buttons, state, setState, classes }) {
           <Link className={classes.linkButtons} to={text === 'home' ? '/' : `/${text}`}><ListItem button key={index}>
             <ListItemIcon><ArrowForwardIosIcon /></ListItemIcon>
             <Button color='primary' fullWidth variant='contained'>{text.toUpperCase()}</Button>
-            {/* <ListItemText primary={text.toUpperCase()} /> */}
           </ListItem>
           </Link>
         ))}
       </List>
     </div>
   );
+  console.log('acaa', state)
 
   return (
-    <div>
-      {['left'].map((anchor) => (
-        <React.Fragment key={anchor}>
-          <SwipeableDrawer
-            anchor={anchor}
-            open={state}
-            onClose={toggleDrawer(anchor, false)}
-            onOpen={toggleDrawer(anchor, true)}
-            PaperProps={{ style: { backgroundColor: '#F6F1EB' } }}
-          >
-            {list(anchor)}
-          </SwipeableDrawer>
-        </React.Fragment>
-      ))}
-    </div>
-  );
-}
 
-SwipeableTemporaryDrawer.defaultProps = {
-  buttons: ['Living', 'Dormitorio']
+      <div>
+        {['left'].map((anchor) => (
+          <>
+            <SwipeableDrawer
+              key={anchor}
+              anchor={anchor}
+              open={state}
+              onClose={toggleDrawer(false)}
+              onOpen={toggleDrawer(true)}
+              PaperProps={{ style: { backgroundColor: '#F6F1EB' } }}
+              // ModalProps={{ onBackdropClick: console.log(state) }}
+            >
+              {list(anchor)}
+            </SwipeableDrawer>
+          </>
+        ))}
+      </div>
+  );
 }
 
 export default SwipeableTemporaryDrawer;

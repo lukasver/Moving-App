@@ -87,6 +87,7 @@ function EmailForm({ handleClose, dataToSend }) {
       </div>
       <Box component='div' mb={2}>
         <Typography variant='h4' align='center' color='primary'>Completa tus datos</Typography>
+        <Typography variant='subtitle2' align='center' color='primary'>Tu listado nos llegará por 📧</Typography>
       </Box>
       <div>
         <TextField

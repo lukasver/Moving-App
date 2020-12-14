@@ -122,7 +122,7 @@ export const EnhancedTableToolbar = (props) => {
             </IconButton>
           </Tooltip>
           <Tooltip title="Enviar">
-            <Button style={{minWidth: 250}} onClick={props.handleSendForm} color='primary' variant='contained'>Enviar listado</Button>
+            <Button className={classes.sendButton} onClick={props.handleSendForm} color='primary' variant='contained'>Enviar listado</Button>
           </Tooltip>
         </Box>
       ) : (

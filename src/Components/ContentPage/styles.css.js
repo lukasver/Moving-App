@@ -6,11 +6,17 @@ export const contentPageStyles = makeStyles(theme => ({
     minHeight: 250,
     backgroundImage: `url(https://picsum.photos/1320/460)`,
     backgroundSize: '100% 100%',
+    '@media (max-width: 960px)': {
+      height: 350,
+    }
   },
   contentContainer: {
     minHeight: 250,
     backgroundImage: `url(${banner})`,
     backgroundSize: '100% 120%',
+    '@media (max-width: 960px)': {
+      height: 350,
+    }
   },
   mainContainer: {
     border: '12px solid #3f51b5',
@@ -33,5 +39,9 @@ export const contentPageStyles = makeStyles(theme => ({
     overflow: 'hidden',
     border: '5px solid black',
     margin: '20px',
+    '@media (max-width: 300px)': {
+      height: '100px',
+      width: '100px'
+    }
   },
 }))

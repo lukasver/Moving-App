@@ -31,7 +31,7 @@ function NavBar({useWindowSize}) {
         <Toolbar variant="dense">
 
           {width >= 960 ?
-            <IconButton onClick={() => setDrawerState(true)} edge="start" className={classes.menuButton} color="inherit" aria-label="home">
+            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="home">
               <Link className={classes.linkButtons} to='/'><FlightTakeoffIcon /></Link>
             </IconButton>
             :

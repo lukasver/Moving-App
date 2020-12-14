@@ -40,9 +40,11 @@ export const useStyles = makeStyles(theme => ({
 
 export const useToolbarStyles = makeStyles((theme) => ({
   root: {
-    borderBottom: '1px solid grey'
-    // paddingLeft: theme.spacing(2),
-    // paddingRight: theme.spacing(1),
+    borderBottom: '1px solid grey',
+    '@media (max-width: 960px)': {
+      display: 'flex',
+      flexDirection: 'column',
+    }
   },
   highlight:
     theme.palette.type === 'light'
@@ -63,6 +65,18 @@ export const useToolbarStyles = makeStyles((theme) => ({
     color: '#FFFFFF !important',
     backgroundColor: `#303f9f !important`,
     opacity: '50%',
+    '@media (max-width: 960px)': {
+      minWidth: 'auto',
+      marginBottom: 10
+    }
+  },
+  sendButton: {
+    minWidth: 250,
+    '@media (max-width: 960px)': {
+      minWidth: 'auto',
+      marginTop: 5,
+      marginBottom: 10
+    }
   }
 }));
 
