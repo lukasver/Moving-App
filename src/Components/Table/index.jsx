@@ -14,7 +14,7 @@ import Switch from '@material-ui/core/Switch';
 import PanoramaIcon from '@material-ui/icons/Panorama';
 import MyModal from './MultiModal';
 import Notifier from './Notifier';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+// import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 
 //data
