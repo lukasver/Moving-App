@@ -1,55 +1,64 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState } from 'react';
 import { Button, Box } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
+import ListIcon from '@material-ui/icons/List';
 import { Link } from 'react-router-dom';
+import { navStyles, drawerStyles } from './styles.css';
+import Drawer from './Drawer'
+import * as areas from '../../data.js';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(4),
-  },
-  navButtons: {
-    color: 'white',
-    display: 'flex',
-    minWidth: '200px',
-  },
-  linkButtons: {
-    textDecoration: 'none',
-    color: 'white',
-  },
-  btnContainer: {
-    display: 'inline-flex',
-    justifyContent: 'space-around',
-    flexGrow: 1,
-  }
-}));
 
 function NavBar() {
-  const classes = useStyles();
-  const navButtons = ['Living', 'Comedor', 'Dormitorio', 'Cocina', 'Bano', 'Exterior']
+  const classes = navStyles();
+
+  const [click, setClick] = useState(false)
+  const [buttons, setButtons] = useState(true)
+  const [drawerState, setDrawerState] = useState(false);
+
+  const navButtons = Object.keys(areas)
+
+  const handleClick = () => setClick(!click);
+  const closeMobileMenu = () => setClick(false);
+
+  const showButton = () => {
+    if (window.innerWidth <= 960) {
+      console.log(window.innerWidth)
+      setButtons(false);
+    } else {
+      setButtons(true);
+    }
+  }
+
+  window.addEventListener('resize', showButton);
+
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar variant="dense">
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <Link className={classes.linkButtons} to='/'><FlightTakeoffIcon/></Link>
-          </IconButton>
+
+          {buttons ?
+            <IconButton onClick={() => setDrawerState(true)} edge="start" className={classes.menuButton} color="inherit" aria-label="home">
+              <Link className={classes.linkButtons} to='/'><FlightTakeoffIcon /></Link>
+            </IconButton>
+            :
+            <IconButton onClick={() => setDrawerState(true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+              <ListIcon />
+            </IconButton>
+          }
           <Box component='div' className={classes.btnContainer}>
-            {navButtons.map(item => {
+            {buttons && navButtons.map(item => {
               return <Link className={classes.linkButtons} to={item}><Button className={classes.navButtons}>{item.toUpperCase() + ' '}</Button></Link>
             })}
           </Box>
         </Toolbar>
+        <Drawer buttons={navButtons} state={drawerState} setState={setDrawerState} classes={drawerStyles()} />
       </AppBar>
     </div>
   );
 }
 
-export default NavBar
+export default NavBar;
